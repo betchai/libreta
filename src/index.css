@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --wine: #4A1D3F;
+    --plum: #4A1D3F;
+    --pink: #EC4899;
+    --pink-light: #F9A8D4;
+    --pink-bg: #FDF2F8;
+    --lav: #8B5CF6;
+    --blue: #4d9de0;
+    --mint: #5dc9a4;
+    --peach: #f59b78;
+    --paper: #FFF0F6;
+    --background: 340 100% 97%;
+    --foreground: 329 50% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 329 50% 18%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 329 50% 18%;
+    --primary: 330 78% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 340 60% 98%;
+    --secondary-foreground: 329 50% 18%;
+    --muted: 340 60% 98%;
+    --muted-foreground: 330 25% 49%;
+    --accent: 263 90% 66%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 340 25% 88%;
+    --input: 340 25% 88%;
+    --ring: 330 78% 60%;
+    --sidebar-bg: 340 50% 97%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+  h1, h2, h3, .display {
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(90deg, #EC4899, #8B5CF6, #4d9de0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .shadow-pink {
+    box-shadow: 0 18px 45px rgba(236, 72, 153, 0.25);
+  }
+  .paper-card {
+    box-shadow: 0 18px 50px rgba(74, 29, 63, 0.08);
+    border: 1px solid rgba(74, 29, 63, 0.07);
+  }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+  .watercolor {
+    filter: blur(1px);
+    opacity: 0.62;
+    border-radius: 42% 58% 63% 37% / 47% 43% 57% 53%;
+  }
+  .tilt-a {
+    transform: rotate(-2deg);
+  }
+  .tilt-b {
+    transform: rotate(1.5deg);
+  }
+}

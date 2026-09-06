@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libreta — Run Your Shop in Full Color</title>
+  <meta name="description" content="Libreta brings sales, inventory, customer credit, purchasing, expenses, bookkeeping, profit tracking, and BIR worksheets together in one clear record.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --plum:#34213f; --pink:#ed4f9b; --pink2:#ff82b8;
+      --lav:#9a7bd1; --blue:#4d9de0; --mint:#5dc9a4;
+      --peach:#f59b78; --paper:#fffafc;
+    }
+    * { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--paper); color:var(--plum); }
+    h1,h2,h3,.display { font-family:'Plus Jakarta Sans',sans-serif; }
+    .watercolor {
+      filter: blur(1px);
+      opacity:.62;
+      border-radius: 42% 58% 63% 37% / 47% 43% 57% 53%;
+    }
+    .paper-card {
+      box-shadow: 0 18px 50px rgba(52,33,63,.08);
+      border:1px solid rgba(52,33,63,.07);
+    }
+    .shadow-pink { box-shadow:0 18px 45px rgba(237,79,155,.25); }
+    .gradient-text {
+      background:linear-gradient(90deg,#ed4f9b,#9a7bd1,#4d9de0);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .grain { position:relative; }
+    .grain:after {
+      content:""; position:absolute; inset:0; pointer-events:none; opacity:.08;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+    }
+    .tilt-a { transform:rotate(-2deg); }
+    .tilt-b { transform:rotate(1.5deg); }
+    .dot { width:8px;height:8px;border-radius:50%;display:inline-block; }
+  </style>
+</head>
+
+<body class="antialiased">
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-pink-100">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 h-18 min-h-[72px] flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-pink-500 via-fuchsia-400 to-sky-400 text-white flex items-center justify-center text-xl font-extrabold shadow-pink">L</div>
+      <div>
+        <div class="text-2xl font-extrabold tracking-tight">Libreta</div>
+        <div class="text-[10px] uppercase tracking-[.2em] text-slate-400 font-bold">One clear record</div>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+      <a href="#how" class="hover:text-pink-600">How It Works</a>
+      <a href="#features" class="hover:text-pink-600">Features</a>
+      <a href="#bir" class="hover:text-purple-600">BIR Compliance</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#signin" class="hidden sm:inline text-sm font-bold text-slate-600 hover:text-pink-600">Sign In</a>
+      <a href="#start" class="rounded-full bg-[var(--plum)] text-white px-5 py-2.5 text-sm font-bold hover:-translate-y-0.5 transition shadow-lg">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="grain relative overflow-hidden pt-16 pb-20 lg:pt-24 lg:pb-28">
+  <div class="absolute -top-20 -left-20 w-80 h-80 bg-pink-300 watercolor"></div>
+  <div class="absolute top-12 right-[-70px] w-96 h-96 bg-sky-200 watercolor"></div>
+  <div class="absolute bottom-[-130px] left-[35%] w-96 h-96 bg-purple-200 watercolor"></div>
+
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/80 border border-pink-200 px-4 py-2 text-xs font-extrabold text-pink-700 shadow-sm mb-7">
+        <i data-lucide="sparkles" class="w-4 h-4"></i>
+        Built for Philippine small businesses
+      </div>
+
+      <h1 class="display text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]">
+        Ditch the boring notebook.<br>
+        Run your shop in <span class="gradient-text">full color.</span>
+      </h1>
+
+      <p class="mt-7 text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        Libreta brings your sales, inventory, customer credit, purchases, expenses,
+        bookkeeping, profit, and BIR worksheets together in one clear record.
+      </p>
+
+      <div class="mt-9 flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#start" class="inline-flex justify-center items-center gap-2 rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white px-7 py-4 font-extrabold shadow-pink hover:-translate-y-1 transition">
+          Run My Business with Libreta
+          <i data-lucide="arrow-right" class="w-5 h-5"></i>
+        </a>
+        <a href="#features" class="inline-flex justify-center items-center rounded-full bg-white border-2 border-slate-200 px-7 py-4 font-extrabold text-slate-700 hover:border-pink-300 hover:text-pink-600 transition">
+          Explore Libreta
+        </a>
+      </div>
+
+      <div class="mt-7 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-bold text-slate-500">
+        <span>✓ POS</span><span>✓ Inventory</span><span>✓ Credit</span>
+        <span>✓ Bookkeeping</span><span>✓ BIR Worksheets</span>
+      </div>
+    </div>
+
+    <!-- DASHBOARD STORY -->
+    <div class="mt-16 max-w-6xl mx-auto relative">
+      <div class="absolute -inset-5 bg-gradient-to-r from-pink-200/50 via-purple-200/40 to-blue-200/50 blur-2xl rounded-[3rem]"></div>
+      <div class="relative bg-white rounded-[2rem] paper-card overflow-hidden">
+        <div class="h-12 bg-slate-50 border-b border-slate-100 flex items-center px-5 gap-2">
+          <span class="dot bg-pink-300"></span><span class="dot bg-yellow-300"></span><span class="dot bg-mint-300"></span>
+          <div class="mx-auto text-[11px] font-bold text-slate-400">libreta.app / dashboard</div>
+        </div>
+        <div class="p-5 md:p-8 grid lg:grid-cols-[1.1fr_2fr] gap-7">
+          <div class="rounded-3xl bg-gradient-to-br from-pink-50 to-purple-50 p-6">
+            <div class="text-xs font-extrabold uppercase tracking-wider text-pink-600">Today</div>
+            <div class="text-4xl font-extrabold mt-2">₱48,260</div>
+            <div class="text-sm text-slate-500 mt-1">Sales revenue</div>
+            <div class="mt-7 grid grid-cols-2 gap-3">
+              <div class="bg-white rounded-2xl p-4">
+                <div class="text-xs text-slate-400">Transactions</div>
+                <div class="text-xl font-extrabold mt-1">126</div>
+              </div>
+              <div class="bg-white rounded-2xl p-4">
+                <div class="text-xs text-slate-400">Outstanding</div>
+                <div class="text-xl font-extrabold mt-1">₱18.4K</div>
+              </div>
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="rounded-3xl bg-blue-50 p-5 border border-blue-100">
+              <i data-lucide="boxes" class="w-7 h-7 text-blue-500"></i>
+              <div class="font-extrabold mt-4">Inventory</div>
+              <div class="text-sm text-slate-500 mt-1">14 items need attention</div>
+              <div class="mt-4 h-2 rounded-full bg-blue-100"><div class="h-2 rounded-full bg-blue-500 w-[72%]"></div></div>
+            </div>
+            <div class="rounded-3xl bg-orange-50 p-5 border border-orange-100">
+              <i data-lucide="hand-coins" class="w-7 h-7 text-orange-500"></i>
+              <div class="font-extrabold mt-4">Customer Credit</div>
+              <div class="text-sm text-slate-500 mt-1">Aging at a glance</div>
+              <div class="mt-4 flex gap-1"><span class="h-2 rounded-full bg-orange-300 w-1/2"></span><span class="h-2 rounded-full bg-orange-200 w-1/4"></span><span class="h-2 rounded-full bg-slate-200 w-1/4"></span></div>
+            </div>
+            <div class="rounded-3xl bg-purple-50 p-5 border border-purple-100">
+              <i data-lucide="book-open-check" class="w-7 h-7 text-purple-500"></i>
+              <div class="font-extrabold mt-4">Books</div>
+              <div class="text-sm text-slate-500 mt-1">Ledger & trial balance</div>
+            </div>
+            <div class="rounded-3xl bg-emerald-50 p-5 border border-emerald-100">
+              <i data-lucide="trending-up" class="w-7 h-7 text-emerald-500"></i>
+              <div class="font-extrabold mt-4">Profit</div>
+              <div class="text-sm text-slate-500 mt-1">Know what you really earned</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section class="py-20 bg-[var(--plum)] text-white relative overflow-hidden">
+  <div class="absolute -top-32 right-[-40px] w-96 h-96 bg-pink-500/25 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-[-160px] left-[-40px] w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
+  <div class="max-w-5xl mx-auto px-5 text-center relative z-10">
+    <div class="text-sm uppercase tracking-[.25em] font-extrabold text-pink-300">From fragmented to connected</div>
+    <h2 class="display text-3xl sm:text-5xl font-extrabold mt-4">Your business has many moving parts.<br>Libreta keeps the picture whole.</h2>
+    <p class="mt-6 text-purple-100 text-lg leading-relaxed max-w-3xl mx-auto">
+      Stop keeping one record for sales, another for stock, another for utang, and another for accounting.
+      Record the transaction once and let your business records stay connected.
+    </p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="max-w-2xl mb-14">
+      <div class="text-sm uppercase tracking-[.2em] font-extrabold text-pink-600">The full picture</div>
+      <h2 class="display text-4xl sm:text-5xl font-extrabold mt-3">One business.<br><span class="gradient-text">Every important record.</span></h2>
+      <p class="mt-5 text-slate-600 text-lg">Not just a cash register. Libreta connects the operational and financial side of your shop.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <article class="rounded-[2rem] p-7 bg-pink-50 border border-pink-100 hover:-translate-y-1 transition">
+        <div class="w-13 h-13 w-14 rounded-2xl bg-pink-500 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="shopping-cart"></i>
+        </div>
+        <h3 class="text-xl font-extrabold mt-6">Sell faster at the counter.</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Cart-based POS, weight-scale checkout for per-kilo pricing, receipt printing, and payment method tracking.</p>
+        <div class="mt-5 text-xs font-extrabold text-pink-600">SALES & POS</div>
+      </article>
+
+      <article class="rounded-[2rem] p-7 bg-blue-50 border border-blue-100 hover:-translate-y-1 transition">
+        <div class="w-14 h-14 rounded-2xl bg-blue-500 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="boxes"></i>
+        </div>
+        <h3 class="text-xl font-extrabold mt-6">Know what is on your shelves.</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Product catalog, stock quantities, low-stock alerts, bulk CSV import, manual sales import, and stock movement history.</p>
+        <div class="mt-5 text-xs font-extrabold text-blue-600">INVENTORY</div>
+      </article>
+
+      <article class="rounded-[2rem] p-7 bg-orange-50 border border-orange-100 hover:-translate-y-1 transition">
+        <div class="w-14 h-14 rounded-2xl bg-orange-400 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="hand-coins"></i>
+        </div>
+        <h3 class="text-xl font-extrabold mt-6">Keep utang from becoming guesswork.</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Customer profiles, credit limits, FIFO-based aging, statements, ledger entries, payments, and collections.</p>
+        <div class="mt-5 text-xs font-extrabold text-orange-600">CUSTOMERS & CREDIT</div>
+      </article>
+
+      <article class="rounded-[2rem] p-7 bg-cyan-50 border border-cyan-100 hover:-translate-y-1 transition">
+        <div class="w-14 h-14 rounded-2xl bg-cyan-500 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="truck"></i>
+        </div>
+        <h3 class="text-xl font-extrabold mt-6">Bring purchasing into the picture.</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Manage suppliers, create and receive purchase orders, track accounts payable, payments, and product cost history.</p>
+        <div class="mt-5 text-xs font-extrabold text-cyan-700">SUPPLIERS & PURCHASES</div>
+      </article>
+
+      <article class="rounded-[2rem] p-7 bg-purple-50 border border-purple-100 hover:-translate-y-1 transition">
+        <div class="w-14 h-14 rounded-2xl bg-purple-500 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="book-open-check"></i>
+        </div>
+        <h3 class="text-xl font-extrabold mt-6">Turn transactions into books.</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Double-entry journal entries, chart of accounts, trial balance, and general ledger views with CSV export.</p>
+        <div class="mt-5 text-xs font-extrabold text-purple-600">BOOKKEEPING</div>
+      </article>
+
+      <article class="rounded-[2rem] p-7 bg-emerald-50 border border-emerald-100 hover:-translate-y-1 transition">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-lg">
+          <i data-lucide="wallet-cards"></i>
+        </div>
+        <h3 class="text-xl font-extrabold mt-6">See where the money goes.</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Log expenses, organize categories, track profit over time, and export the information you need.</p>
+        <div class="mt-5 text-xs font-extrabold text-emerald-700">EXPENSES & PROFIT</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="py-24 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto">
+      <div class="text-sm uppercase tracking-[.2em] font-extrabold text-purple-600">How it comes together</div>
+      <h2 class="display text-4xl sm:text-5xl font-extrabold mt-3">Record once.<br>See the whole business.</h2>
+      <p class="mt-5 text-slate-600 text-lg">The value is not in having more screens. It is in having one connected record behind them.</p>
+    </div>
+
+    <div class="mt-14 grid md:grid-cols-3 gap-7">
+      <div class="paper-card bg-white rounded-[2rem] p-7 tilt-a">
+        <div class="text-5xl font-extrabold text-pink-300">01</div>
+        <h3 class="text-2xl font-extrabold mt-5">Make the sale</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Sell products, weigh goods when needed, record the payment, and print the receipt.</p>
+      </div>
+      <div class="paper-card bg-white rounded-[2rem] p-7 tilt-b">
+        <div class="text-5xl font-extrabold text-blue-300">02</div>
+        <h3 class="text-2xl font-extrabold mt-5">Keep records connected</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Sales affect inventory, customer balances, and the financial records that support your business.</p>
+      </div>
+      <div class="paper-card bg-white rounded-[2rem] p-7 tilt-a">
+        <div class="text-5xl font-extrabold text-purple-300">03</div>
+        <h3 class="text-2xl font-extrabold mt-5">Understand the business</h3>
+        <p class="mt-3 text-slate-600 leading-relaxed">Use dashboards, reports, profit tracking, ledgers, and BIR worksheets to see what is happening.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIR -->
+<section id="bir" class="py-24 bg-[var(--plum)] text-white overflow-hidden relative">
+  <div class="absolute top-[-100px] left-[15%] w-80 h-80 bg-purple-500/25 blur-3xl rounded-full"></div>
+  <div class="absolute bottom-[-120px] right-[5%] w-96 h-96 bg-pink-500/25 blur-3xl rounded-full"></div>
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/15 px-4 py-2 text-xs font-extrabold text-pink-200">
+          <i data-lucide="file-check-2" class="w-4 h-4"></i>
+          Philippine BIR compliance
+        </div>
+        <h2 class="display text-4xl sm:text-5xl font-extrabold mt-6">Your business records should be ready when tax time comes.</h2>
+        <p class="mt-5 text-purple-100 text-lg leading-relaxed">
+          Libreta organizes the information used for quarterly BIR worksheets so your sales, purchases, expenses, and books are not scattered when you need them.
+        </p>
+        <div class="mt-8 grid sm:grid-cols-2 gap-3 text-sm">
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><b>2550Q</b><span class="block text-purple-200 mt-1">VAT Summary</span></div>
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><b>1701Q</b><span class="block text-purple-200 mt-1">Income Tax</span></div>
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><b>2551Q</b><span class="block text-purple-200 mt-1">Percentage Tax</span></div>
+          <div class="bg-white/10 rounded-2xl p-4 border border-white/10"><b>SC/PWD</b><span class="block text-purple-200 mt-1">Discount Report</span></div>
+        </div>
+      </div>
+
+      <div class="bg-white text-slate-800 rounded-[2rem] p-7 shadow-2xl">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+          <div>
+            <div class="text-[10px] uppercase tracking-[.2em] font-extrabold text-purple-500">Quarterly worksheet</div>
+            <div class="font-extrabold mt-1">Business Tax Summary</div>
+          </div>
+          <div class="rounded-full bg-pink-50 text-pink-600 px-3 py-1 text-xs font-extrabold">Q3</div>
+        </div>
+        <div class="mt-5 space-y-4 text-sm">
+          <div class="flex justify-between"><span class="text-slate-500">Sales revenue</span><b>₱1,482,900</b></div>
+          <div class="flex justify-between"><span class="text-slate-500">SC/PWD discounts</span><b class="text-orange-500">(₱48,200)</b></div>
+          <div class="flex justify-between"><span class="text-slate-500">Net taxable revenue</span><b>₱1,434,700</b></div>
+          <div class="rounded-2xl bg-blue-50 p-4 flex justify-between text-blue-700"><span class="font-bold">Input VAT creditable</span><b>₱64,120.50</b></div>
+          <div class="pt-3 border-t border-slate-100 text-xs text-slate-400">Organized records for review and filing preparation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS TYPES -->
+<section class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-5 text-center">
+    <div class="text-sm uppercase tracking-[.2em] font-extrabold text-pink-600">Made for real shops</div>
+    <h2 class="display text-4xl font-extrabold mt-3">From the neighborhood store to the growing retailer.</h2>
+    <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
+      <div class="rounded-3xl bg-pink-50 p-6 border border-pink-100"><i data-lucide="store" class="text-pink-500"></i><h3 class="font-extrabold mt-5">Retail Stores</h3><p class="text-sm text-slate-500 mt-2">Keep sales, stock, and customer balances together.</p></div>
+      <div class="rounded-3xl bg-blue-50 p-6 border border-blue-100"><i data-lucide="wheat" class="text-blue-500"></i><h3 class="font-extrabold mt-5">Sari-Sari & Grocery</h3><p class="text-sm text-slate-500 mt-2">Handle everyday products and quantity-based selling.</p></div>
+      <div class="rounded-3xl bg-orange-50 p-6 border border-orange-100"><i data-lucide="cake-slice" class="text-orange-500"></i><h3 class="font-extrabold mt-5">Bakeries & Food Shops</h3><p class="text-sm text-slate-500 mt-2">Track fast-moving products, purchases, expenses, and sales.</p></div>
+      <div class="rounded-3xl bg-purple-50 p-6 border border-purple-100"><i data-lucide="shirt" class="text-purple-500"></i><h3 class="font-extrabold mt-5">Boutiques</h3><p class="text-sm text-slate-500 mt-2">Manage products, transactions, customers, and profitability.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="start" class="grain relative overflow-hidden py-24 bg-gradient-to-br from-pink-200 via-purple-100 to-blue-200">
+  <div class="absolute -top-20 -right-20 w-80 h-80 bg-pink-400/35 watercolor"></div>
+  <div class="absolute bottom-[-100px] left-[-50px] w-80 h-80 bg-blue-300/40 watercolor"></div>
+  <div class="max-w-4xl mx-auto px-5 text-center relative z-10">
+    <div class="inline-flex items-center gap-2 bg-white/75 rounded-full px-4 py-2 text-xs font-extrabold text-purple-700 border border-white mb-6">
+      <i data-lucide="heart" class="w-4 h-4"></i>
+      Less clutter. More clarity.
+    </div>
+    <h2 class="display text-4xl sm:text-6xl font-extrabold leading-tight">Your shop already has enough to keep track of.</h2>
+    <p class="mt-5 text-lg text-slate-600 max-w-2xl mx-auto">Give all those moving parts one home.</p>
+    <a href="#onboarding" class="mt-8 inline-flex items-center gap-2 rounded-full bg-[var(--plum)] text-white px-8 py-4 font-extrabold shadow-xl hover:-translate-y-1 transition">
+      Get Started with Libreta <i data-lucide="arrow-right"></i>
+    </a>
+  </div>
+</section>
+
+<footer class="bg-white border-t border-slate-100 py-8">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8 flex flex-col md:flex-row gap-3 items-center justify-between text-xs font-semibold text-slate-400">
+    <div><span class="text-pink-600 font-extrabold text-sm">Libreta</span> © <span id="year"></span> All rights reserved.</div>
+    <div>Business management for Philippine small businesses.</div>
+  </div>
+</footer>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+project_id = "libreta"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+
+[db]
+port = 54322
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:3000"]
+jwt_expiry = 3600
+email_confirm_required = false
+
+[edge_runtime]
+enabled = true
+
+[functions.ask-libre]
+verify_jwt = false
+import_map = "./functions/ask-libre/deno.json"
+entrypoint = "./functions/ask-libre/index.ts"

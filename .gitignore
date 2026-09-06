@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.env.*
+!.env.example
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Local Netlify folder
+.netlify
+
+# Supabase CLI local state
+supabase/.temp
