@@ -32,7 +32,10 @@ const Profit = lazy(() => import('@/pages/Profit'))
 const Users = lazy(() => import('@/pages/Users'))
 const ResetPassword = lazy(() => import('@/pages/ResetPassword'))
 const ImportHistory = lazy(() => import('@/pages/ImportHistory'))
+const PhysicalCount = lazy(() => import('@/pages/PhysicalCount'))
+const ArAgingReport = lazy(() => import('@/pages/ArAgingReport'))
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
+const Analytics = lazy(() => import('@/pages/Analytics'))
 const PageNotFound = lazy(() => import('@/lib/PageNotFound'))
 
 const pageFallback = (
@@ -90,7 +93,9 @@ const AuthenticatedApp = () => {
     { path: 'Sales', el: <Sales />, name: 'Sales' },
     { path: 'Inventory', el: <Inventory />, name: 'Inventory' },
     { path: 'ImportHistory', el: <ImportHistory />, name: 'ImportHistory' },
+    { path: 'PhysicalCount', el: <PhysicalCount />, name: 'PhysicalCount' },
     { path: 'Customers', el: <Customers />, name: 'Customers' },
+    { path: 'ArAgingReport', el: <ArAgingReport />, name: 'ArAgingReport' },
     { path: 'CreditSummary', el: <CreditSummary />, name: 'CreditSummary' },
     { path: 'CustomerReports', el: <CustomerReports />, name: 'CustomerReports' },
     { path: 'Suppliers', el: <Suppliers />, name: 'Suppliers' },
@@ -99,6 +104,7 @@ const AuthenticatedApp = () => {
     { path: 'Bookkeeping', el: <Bookkeeping />, name: 'Bookkeeping' },
     { path: 'BirCompliance', el: <BirCompliance />, name: 'BirCompliance' },
     { path: 'Profit', el: <Profit />, name: 'Profit' },
+    { path: 'Analytics', el: <Analytics />, name: 'Analytics' },
     { path: 'Users', el: <Users />, name: 'Users' },
     { path: 'Settings', el: <Settings />, name: 'Settings' },
   ]

@@ -59,7 +59,7 @@ export function useRestockProduct() {
   const tenantId = useTenantId()
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: async ({ product, quantity, unitCost, supplierId, supplierName, paid }) => {
+    mutationFn: async ({ product, quantity, unitCost, supplierId, supplierName, paid, invoiceNumber, isVatRegisteredSupplier, nonCreditable }) => {
       const { data, error } = await base44.rpc('restock_goods', {
         p_tenant: tenantId,
         p_product_id: product.id,
@@ -69,6 +69,9 @@ export function useRestockProduct() {
         p_supplier_name: supplierName || '',
         p_paid: paid,
         p_recorded_by: 'Admin',
+        p_invoice_number: invoiceNumber || '',
+        p_is_vat_registered_supplier: isVatRegisteredSupplier || false,
+        p_non_creditable: nonCreditable || false,
       })
       if (error) throw new Error(error.message)
       return data

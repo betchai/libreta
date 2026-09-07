@@ -123,8 +123,8 @@ export default function UserManagement({ tenants, profiles, currentUserId }) {
     const availableTenants = tenants.filter((t) => !userMemberships.some((m) => m.tenant_id === t.id))
     return (
       <tr key={`${p.id}-detail`}>
-        <td colSpan={6} className="px-4 py-4 bg-purple-50/40">
-          <div className="space-y-3">
+        <td colSpan={6} className="px-4 py-3">
+          <div className="bg-slate-100 border border-slate-300 rounded-lg p-4 space-y-3">
             <div className="text-xs font-semibold uppercase text-slate-500">Memberships ({userMemberships.length})</div>
             {userMemberships.map((m) => (
               <div key={m.id} className="flex items-center justify-between border rounded-lg p-2.5 bg-white">

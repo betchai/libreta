@@ -7,18 +7,9 @@ import UserManagement from '@/components/platform/UserManagement'
 import { isSuperadmin } from '@/lib/auth-roles'
 import { useAuth } from '@/lib/AuthContext'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { dashboardNarrative } from '@/lib/insights/report-narrator'
-import { Building2, Copy, Lightbulb, Send, ShieldCheck, Store } from 'lucide-react'
+import { Building2, Copy, Send, ShieldCheck, Store } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
-
-const MONEY = (n) => `₱${(Number(n) || 0).toFixed(2)}`
-
-const SNAP_STYLE = {
-  critical: { pill: 'bg-rose-100 text-rose-700', dot: 'bg-rose-500', label: 'Critical' },
-  attention: { pill: 'bg-amber-100 text-amber-700', dot: 'bg-amber-500', label: 'Needs attention' },
-  good: { pill: 'bg-emerald-100 text-emerald-700', dot: 'bg-emerald-500', label: 'Healthy' },
-}
 
 export default function PlatformAdmin() {
   const { user } = useAuth()
@@ -53,17 +44,6 @@ export default function PlatformAdmin() {
     queryKey: ['platformInvites'],
     enabled: superadmin,
     queryFn: () => base44.entities.TenantInvitation.filter({}, '-created_date', 1000),
-  })
-
-  // ---- Libreta Insights (superadmin-only RPC; security definer bypasses RLS) ----
-  const { data: snapshots = [], isLoading: snapLoading, error: snapErr } = useQuery({
-    queryKey: ['storeSnapshot'],
-    enabled: superadmin,
-    queryFn: async () => {
-      const { data, error } = await base44.rpc('admin_store_snapshot')
-      if (error) throw new Error(error.message)
-      return data || []
-    },
   })
 
   const countFor = (tenantId) => profiles.filter((p) => p.tenant_id === tenantId).length
@@ -115,24 +95,6 @@ export default function PlatformAdmin() {
       setInviting(false)
     }
   }
-
-  // ---- Explain Reports: deterministic narratives from the live snapshot ----
-  const narratives = (() => {
-    if (!snapshots.length) return null
-    const totalRev = snapshots.reduce((s, r) => s + (Number(r.revenue_30d) || 0), 0)
-    const totalTxns = snapshots.reduce((s, r) => s + (Number(r.txns_30d) || 0), 0)
-    const avgPct = snapshots.reduce((s, r) => s + (Number(r.sales_pct) || 0), 0) / snapshots.length
-    const lowRisk = snapshots.filter((r) => Number(r.low_stock) > 0)
-    const credit = snapshots.reduce((s, r) => s + (Number(r.outstanding) || 0), 0)
-    return [
-      `Across ${snapshots.length} store${snapshots.length === 1 ? '' : 's'}, 30-day revenue is ${MONEY(totalRev)} from ${totalTxns} transactions.`,
-      dashboardNarrative({ sales_pct: avgPct }, []),
-      lowRisk.length
-        ? `${lowRisk.length} store${lowRisk.length === 1 ? ' has' : 's have'} low-stock items: ${lowRisk.map((r) => r.business_name).join(', ')}.`
-        : 'No store has low-stock items right now.',
-      credit > 0 ? `Outstanding customer credit across stores is ${MONEY(credit)}.` : 'No outstanding customer credit across stores.',
-    ]
-  })()
 
   // ---- Non-superadmin guard (route is reachable by URL; RLS blocks data) ----
   if (!superadmin) {
@@ -237,68 +199,6 @@ export default function PlatformAdmin() {
         </Button>
       </Card>
 
-      {/* ---- Libreta Insights (admin_store_snapshot RPC) ---- */}
-      <Card className="overflow-hidden">
-        <div className="p-4 border-b flex items-center justify-between">
-          <h3 className="flex items-center gap-2 font-semibold text-slate-800">Libreta Insights</h3>
-          <span className="text-xs text-slate-400">30d revenue · 7d vs prior-7d sales trend · outstanding credit (RLS-safe snapshot)</span>
-        </div>
-        {snapErr ? (
-          <p className="px-4 py-8 text-center text-sm text-slate-400">Snapshot unavailable. Requires a platform superadmin account.</p>
-        ) : snapLoading ? (
-          <div className="py-10 text-center text-slate-400 text-sm">Loading snapshot…</div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="bg-purple-50 text-left text-xs uppercase text-purple-600">
-                <tr>
-                  <th className="px-4 py-3">Business</th>
-                  <th className="px-4 py-3 text-right">30d Revenue</th>
-                  <th className="px-4 py-3 text-right">Txns</th>
-                  <th className="px-4 py-3 text-right">7d Trend</th>
-                  <th className="px-4 py-3 text-right">ATV</th>
-                  <th className="px-4 py-3 text-right">Products</th>
-                  <th className="px-4 py-3 text-right">Low Stock</th>
-                  <th className="px-4 py-3 text-right">Outstanding</th>
-                  <th className="px-4 py-3">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {snapshots.map((s) => {
-                  const pill = SNAP_STYLE[s.status] || SNAP_STYLE.good
-                  const pct = Number(s.sales_pct) || 0
-                  const pctCls = pct < 0 ? 'text-rose-600' : pct > 0 ? 'text-emerald-600' : 'text-slate-500'
-                  return (
-                    <tr key={s.id} className="border-t">
-                      <td className="px-4 py-3 font-medium">{s.business_name}</td>
-                      <td className="px-4 py-3 text-right">{MONEY(s.revenue_30d)}</td>
-                      <td className="px-4 py-3 text-right">{s.txns_30d}</td>
-                      <td className={`px-4 py-3 text-right ${pctCls}`}>{pct >= 0 ? '+' : ''}{pct.toFixed(1)}%</td>
-                      <td className="px-4 py-3 text-right">{MONEY(s.atv)}</td>
-                      <td className="px-4 py-3 text-right">{s.products}</td>
-                      <td className="px-4 py-3 text-right">
-                        {Number(s.low_stock) > 0 ? <span className="text-rose-600 font-semibold">{s.low_stock}</span> : 0}
-                      </td>
-                      <td className="px-4 py-3 text-right">
-                        {Number(s.outstanding) > 0 ? <span className="text-amber-600">{MONEY(s.outstanding)}</span> : MONEY(0)}
-                      </td>
-                      <td className="px-4 py-3">
-                        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${pill.pill}`}>
-                          <span className={`w-2 h-2 rounded-full ${pill.dot}`} />{pill.label}
-                        </span>
-                      </td>
-                    </tr>
-                  )
-                })}
-                {snapshots.length === 0 && (
-                  <tr><td colSpan={9} className="px-4 py-8 text-center text-slate-400">No snapshot data yet</td></tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Card>
-
       {/* ---- User Management (platform admin only) ---- */}
       <UserManagement tenants={tenants} profiles={profiles} currentUserId={user?.id} />
 
@@ -341,20 +241,6 @@ export default function PlatformAdmin() {
         </div>
       </Card>
 
-      {/* ---- Explain Reports (deterministic, from the live snapshot) ---- */}
-      <Card className="p-4">
-        <h3 className="flex items-center gap-2 font-semibold text-slate-800"><Lightbulb className="w-4 h-4" /> Explain Reports</h3>
-        <p className="text-xs text-slate-500 mb-4">Deterministic narratives from your live platform data</p>
-        {narratives ? (
-          <div className="space-y-2">
-            {narratives.map((line, idx) => (
-              <p key={idx} className="text-sm text-slate-600">{line}</p>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-slate-400">Snapshot data will appear here once stores record sales.</p>
-        )}
-      </Card>
     </div>
   )
 }
